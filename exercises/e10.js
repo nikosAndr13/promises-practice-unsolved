@@ -5,10 +5,10 @@
  * for the next task. The result4 is already using .race(), so you can't use it for result1, result2 or result3
  */
 
-const promise1 = new Promise((res) => setTimeout(res, 4000, 'RESOLVED AGAIN'));
-const promise2 = Promise.reject('Promise 2 REJECTED');
-const promise3 = Promise.resolve('Promise 3 RESOLVED');
-const promise4 = new Promise((res) => setTimeout(res, 3000, 'RESOLVED AGAIN'));
+const promise1 = new Promise((res) => setTimeout(res, 4000, "RESOLVED AGAIN"));
+const promise2 = Promise.reject("Promise 2 REJECTED");
+const promise3 = Promise.resolve("Promise 3 RESOLVED");
+const promise4 = new Promise((res) => setTimeout(res, 3000, "RESOLVED AGAIN"));
 const promiseArr = [promise1, promise2, promise3, promise4];
 
 /**
@@ -20,8 +20,11 @@ const promiseArr = [promise1, promise2, promise3, promise4];
  * that will log and return the caught rejection reason from promise2
  * when promiseArr was passed as the argument
  */
+export const result1 = Promise.all(promiseArr).catch((error) => {
+  return error;
+});
 
-export const result1 = val; // Your code here
+// Your code here
 
 /**
  * @task
@@ -33,7 +36,9 @@ export const result1 = val; // Your code here
  * when promiseArr was passed as the argument
  */
 
-export const result2 = val; // Your code here
+export const result2 = Promise.any(promiseArr).then((res) => {
+  return res;
+}); // Your code here
 
 /**
  * @task
@@ -45,7 +50,7 @@ export const result2 = val; // Your code here
  * when promiseArr was passed as the argument
  */
 
-export const result3 = val; // Your code here
+export const result3 = Promise.allSettled(promiseArr).then((res) => res); // Your code here
 
 /**
  * @task
@@ -55,8 +60,7 @@ export const result3 = val; // Your code here
  * You can use any array methods you know (map(), reduce(), filter() etc...).
  * Example: export const newPromiseArr = promiseArr.<method>()...
  */
-
-export const newPromiseArr = val; // Your code here
+export const newPromiseArr = promiseArr.slice(-1);
 
 // Do NOT refactor or update result 4, it's all set to work
 export const result4 = Promise.race(newPromiseArr)
@@ -64,7 +68,7 @@ export const result4 = Promise.race(newPromiseArr)
     return data;
   })
   .catch((err) => {
-    console.log(err);
+    // console.log(err);
     return err;
   });
 
